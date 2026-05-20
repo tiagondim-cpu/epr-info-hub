@@ -14,22 +14,60 @@
   --color-unb-aviso:       #e67e22;
   --font-sans: 'Inter', system-ui, sans-serif;
   --radius: 0.5rem;
-  --sidebar-width: 240px;
-  --sidebar-width-collapsed: 60px;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
   }
+
   body {
     background-color: #f8fafc;
     color: var(--color-unb-texto);
     margin: 0;
     font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+
   #root {
     min-height: 100vh;
     display: flex;
   }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-unb-azul);
+    outline-offset: 2px;
+  }
+
+  /* Scrollbar fina */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+}
+
+@keyframes fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-page-enter {
+  animation: fade-slide-up 0.25s ease-out forwards;
 }

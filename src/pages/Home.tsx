@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Briefcase, Star, Lock, Clock, AlertTriangle, BarChart2, GraduationCap, Search } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { ArrowRight, Briefcase, Star, Lock, Clock, AlertTriangle, BarChart2 } from 'lucide-react'
 import SearchBar from '../components/ui/SearchBar'
 import Badge from '../components/ui/Badge'
 import { temaCards } from '../content/temas'
+import { faqItems } from '../content/faq'
+import { procedimentos } from '../content/procedimentos'
+import { links } from '../content/links'
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   briefcase: Briefcase,
@@ -14,124 +18,148 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
 }
 
 const jornadaItems = [
-  { label: 'Início do Curso',    hash: 'inicio',  desc: '1º–2º semestre'   },
-  { label: 'Durante o Curso',    hash: 'durante', desc: '3º–6º semestre'   },
-  { label: 'Meio do Curso',      hash: 'meio',    desc: '5º–8º semestre'   },
-  { label: 'Final do Curso',     hash: 'final',   desc: '9º–12º semestre'  },
-  { label: 'Situações de Risco', hash: 'risco',   desc: 'Fase probatória'  },
+  { label: 'Início',    hash: 'inicio',  num: '1–2', desc: 'semestre' },
+  { label: 'Durante',   hash: 'durante', num: '3–6', desc: 'semestre' },
+  { label: 'Meio',      hash: 'meio',    num: '5–8', desc: 'semestre' },
+  { label: 'Final',     hash: 'final',   num: '9–12', desc: 'semestre' },
+  { label: 'Risco',     hash: 'risco',   num: '!',    desc: 'urgente' },
 ]
 
-const procedimentoItems = [
-  'Como trancar pelo SEI',
-  'Inscrição no Estágio Obrigatório',
-  'Validar Atividades Complementares',
-  'Pedir prorrogação de prazo',
-]
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06 } },
+}
+
+const item = {
+  hidden: { opacity: 0, y: 12 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.25, ease: 'easeOut' as const } },
+}
 
 export default function Home() {
+  const stats = [
+    { label: 'temas', value: temaCards.length },
+    { label: 'FAQs', value: faqItems.length },
+    { label: 'guias', value: procedimentos.length },
+    { label: 'links', value: links.length },
+  ]
+
   return (
-    <div className="max-w-5xl mx-auto space-y-10">
-      {/* Cabeçalho da página */}
-      <div>
-        <div className="flex items-center gap-2 mb-1">
-          <GraduationCap size={20} className="text-unb-azul" />
-          <span className="text-sm font-medium text-unb-azul">EPR / UnB — 2026/1</span>
+    <div className="max-w-5xl mx-auto space-y-8 animate-page-enter">
+      {/* Cabeçalho */}
+      <div className="space-y-4">
+        <div>
+          <h1 className="text-2xl font-bold text-slate-900">Bem-vindo ao EPR Info Hub</h1>
+          <p className="text-slate-500 mt-1 text-sm">
+            Tudo que você precisa saber sobre seu curso, num só lugar.
+          </p>
         </div>
-        <h1 className="text-2xl font-bold text-slate-900">Bem-vindo ao EPR Info Hub</h1>
-        <p className="text-slate-500 mt-1 text-sm">
-          Tudo que você precisa saber sobre seu curso, num só lugar. Busque ou navegue pelos temas abaixo.
-        </p>
+
+        {/* Stats */}
+        <div className="flex items-center gap-4 flex-wrap">
+          {stats.map((s, i) => (
+            <span key={s.label} className="flex items-center gap-1.5 text-xs text-slate-400">
+              <span className="font-semibold text-slate-700">{s.value}</span>
+              {s.label}
+              {i < stats.length - 1 && <span className="text-slate-200 ml-2">·</span>}
+            </span>
+          ))}
+        </div>
+
+        {/* SearchBar integrada */}
+        <div className="relative">
+          <SearchBar />
+        </div>
       </div>
 
-      {/* SearchBar */}
-      <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
-        <p className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-2.5 flex items-center gap-1.5">
-          <Search size={12} />
-          Busca rápida
-        </p>
-        <SearchBar />
-        <p className="text-xs text-slate-400 mt-2">
-          Tente: estágio, trancamento, IRA, atividades complementares, desligamento...
-        </p>
-      </div>
-
-      {/* Temas */}
+      {/* Temas principais */}
       <section>
-        <h2 className="text-base font-semibold text-slate-700 mb-3">Temas principais</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-3">Temas principais</h2>
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
+        >
           {temaCards.map((tema) => {
             const Icon = iconMap[tema.icone] ?? Briefcase
             return (
-              <Link
-                key={tema.id}
-                to={tema.rota}
-                className="group bg-white rounded-xl p-4 border border-slate-200 hover:border-unb-azul hover:shadow-md transition-all flex flex-col gap-3"
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 bg-unb-azul-pale rounded-lg flex items-center justify-center shrink-0">
-                      <Icon size={15} className="text-unb-azul" />
+              <motion.div key={tema.id} variants={item}>
+                <Link
+                  to={tema.rota}
+                  className="group bg-white rounded-xl p-4 border border-slate-200 hover:border-unb-azul hover:shadow-md transition-all flex flex-col gap-3 h-full"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 bg-unb-azul-pale rounded-lg flex items-center justify-center shrink-0 group-hover:bg-unb-azul/10 transition-colors">
+                        <Icon size={15} className="text-unb-azul" />
+                      </div>
+                      <h3 className="text-sm font-semibold text-slate-900 group-hover:text-unb-azul transition-colors leading-tight">
+                        {tema.titulo}
+                      </h3>
                     </div>
-                    <h3 className="text-sm font-semibold text-slate-900 group-hover:text-unb-azul transition-colors leading-tight">
-                      {tema.titulo}
-                    </h3>
+                    <ArrowRight size={14} className="text-slate-300 group-hover:text-unb-azul group-hover:translate-x-0.5 transition-all shrink-0 mt-0.5" />
                   </div>
-                  <ArrowRight size={14} className="text-slate-300 group-hover:text-unb-azul transition-colors shrink-0 mt-0.5" />
-                </div>
-                <p className="text-xs text-slate-500 leading-relaxed">{tema.descricao}</p>
-                {tema.badges.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5">
-                    {tema.badges.map((badge, i) => (
-                      <Badge key={i} {...badge} />
-                    ))}
-                  </div>
-                )}
-              </Link>
+                  <p className="text-xs text-slate-500 leading-relaxed">{tema.descricao}</p>
+                  {tema.badges.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5 mt-auto">
+                      {tema.badges.map((badge, i) => (
+                        <Badge key={i} {...badge} />
+                      ))}
+                    </div>
+                  )}
+                </Link>
+              </motion.div>
             )
           })}
-        </div>
+        </motion.div>
       </section>
 
-      {/* Por fase da jornada */}
+      {/* Por fase do curso */}
       <section>
-        <h2 className="text-base font-semibold text-slate-700 mb-3">Por fase do curso</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-5 gap-2">
-          {jornadaItems.map((item) => (
+        <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-3">Por fase do curso</h2>
+        <div className="grid grid-cols-5 gap-2">
+          {jornadaItems.map((j) => (
             <Link
-              key={item.hash}
-              to={`/jornada#${item.hash}`}
-              className="group flex flex-col items-center text-center p-3.5 rounded-xl bg-white border border-slate-200 hover:border-unb-azul hover:bg-unb-azul-pale transition-all"
+              key={j.hash}
+              to={`/jornada#${j.hash}`}
+              className="group flex flex-col items-center text-center p-3 rounded-xl bg-white border border-slate-200 hover:border-unb-azul hover:bg-unb-azul-pale transition-all"
             >
-              <span className="text-xs font-semibold text-slate-700 group-hover:text-unb-azul leading-tight transition-colors">
-                {item.label}
+              <span className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold mb-1.5 transition-colors
+                ${j.hash === 'risco'
+                  ? 'bg-red-100 text-red-600 group-hover:bg-red-500 group-hover:text-white'
+                  : 'bg-slate-100 text-slate-600 group-hover:bg-unb-azul group-hover:text-white'
+                }`}
+              >
+                {j.num}
               </span>
-              <span className="text-xs text-slate-400 mt-0.5">{item.desc}</span>
+              <span className="text-xs font-semibold text-slate-700 group-hover:text-unb-azul leading-tight transition-colors">
+                {j.label}
+              </span>
+              <span className="text-[10px] text-slate-400 mt-0.5">{j.desc}</span>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* Procedimentos rápidos */}
+      {/* Guias passo a passo */}
       <section>
-        <h2 className="text-base font-semibold text-slate-700 mb-3">Guias passo a passo</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-          {procedimentoItems.map((titulo, i) => (
+        <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-3">Guias passo a passo</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {procedimentos.map((p) => (
             <Link
-              key={titulo}
+              key={p.id}
               to="/procedimentos"
               className="group flex items-center gap-3 bg-white rounded-xl px-4 py-3 border border-slate-200 hover:border-unb-verde hover:shadow-sm transition-all"
             >
-              <span className="w-6 h-6 rounded-full bg-unb-verde-pale text-unb-verde flex items-center justify-center text-xs font-bold shrink-0 group-hover:bg-unb-verde group-hover:text-white transition-colors">
-                {i + 1}
-              </span>
-              <span className="text-sm font-medium text-slate-700 group-hover:text-slate-900 transition-colors">{titulo}</span>
-              <ArrowRight size={14} className="ml-auto text-slate-300 group-hover:text-unb-verde transition-colors shrink-0" />
+              <span className="w-1.5 h-1.5 rounded-full bg-unb-verde shrink-0 group-hover:scale-125 transition-transform" />
+              <span className="text-sm font-medium text-slate-700 group-hover:text-slate-900 transition-colors flex-1">{p.titulo}</span>
+              <ArrowRight size={14} className="ml-auto text-slate-300 group-hover:text-unb-verde group-hover:translate-x-0.5 transition-all shrink-0" />
             </Link>
           ))}
         </div>
       </section>
 
-      {/* Nota de rodapé */}
+      {/* Rodapé informativo */}
       <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 text-xs text-slate-500 text-center">
         Informações baseadas em fontes oficiais: epr.unb.br, saa.unb.br, deg.unb.br e SIGAA.
         Dúvidas: <a href="mailto:epr@unb.br" className="text-unb-azul hover:underline font-medium">epr@unb.br</a>

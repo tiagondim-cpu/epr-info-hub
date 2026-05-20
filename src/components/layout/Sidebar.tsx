@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import { cn } from '../../lib/utils'
 import {
@@ -13,11 +14,11 @@ import {
 } from 'lucide-react'
 
 const navItems = [
-  { to: '/',               label: 'Início',        icon: Home },
-  { to: '/jornada',        label: 'Minha Jornada', icon: GraduationCap },
-  { to: '/faq',            label: 'FAQ',            icon: HelpCircle },
-  { to: '/procedimentos',  label: 'Procedimentos',  icon: ClipboardList },
-  { to: '/links',          label: 'Links Úteis',    icon: Link2 },
+  { to: '/',              label: 'Início',        icon: Home },
+  { to: '/jornada',       label: 'Minha Jornada', icon: GraduationCap },
+  { to: '/faq',           label: 'FAQ',            icon: HelpCircle },
+  { to: '/procedimentos', label: 'Procedimentos',  icon: ClipboardList },
+  { to: '/links',         label: 'Links Úteis',    icon: Link2 },
 ]
 
 export default function Sidebar() {
@@ -30,26 +31,33 @@ export default function Sidebar() {
   }, [collapsed])
 
   return (
-    <Tooltip.Provider delayDuration={0}>
-      <aside
-        className={cn(
-          'hidden lg:flex flex-col h-screen bg-white border-r border-slate-200 transition-all duration-200 shrink-0',
-          collapsed ? 'w-[60px]' : 'w-[240px]'
-        )}
+    <Tooltip.Provider delayDuration={100}>
+      <motion.aside
+        animate={{ width: collapsed ? 60 : 240 }}
+        transition={{ duration: 0.2, ease: 'easeInOut' }}
+        className="hidden lg:flex flex-col h-screen bg-[#fafafa] border-r border-slate-200 shrink-0 overflow-hidden"
       >
         {/* Logo + título */}
-        <div className="flex items-center gap-3 px-3 py-4 border-b border-slate-100 overflow-hidden">
+        <div className="flex items-center gap-3 px-3 py-5 border-b border-slate-100">
           <img
             src="/unb-logo.png"
             alt="Logo UnB"
-            className="w-9 h-9 object-contain shrink-0"
+            className="w-8 h-8 object-contain shrink-0"
           />
-          {!collapsed && (
-            <div className="min-w-0">
-              <p className="text-sm font-bold text-unb-azul leading-tight truncate">EPR Info Hub</p>
-              <p className="text-xs text-slate-400 leading-tight truncate">Eng. de Produção / UnB</p>
-            </div>
-          )}
+          <AnimatePresence initial={false}>
+            {!collapsed && (
+              <motion.div
+                initial={{ opacity: 0, x: -8 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -8 }}
+                transition={{ duration: 0.15 }}
+                className="min-w-0"
+              >
+                <p className="text-sm font-bold text-unb-azul leading-tight truncate">EPR Info Hub</p>
+                <p className="text-[11px] text-slate-400 leading-tight truncate">Eng. de Produção / UnB</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Navegação */}
@@ -62,22 +70,45 @@ export default function Sidebar() {
                   end={to === '/'}
                   className={({ isActive }) =>
                     cn(
-                      'flex items-center gap-3 rounded-lg px-2.5 py-2 text-sm font-medium transition-colors',
+                      'relative flex items-center gap-3 rounded-lg px-2.5 py-2.5 text-sm font-medium transition-all duration-150',
                       isActive
-                        ? 'bg-unb-azul text-white'
+                        ? 'bg-unb-azul text-white shadow-sm shadow-blue-900/20'
                         : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                     )
                   }
                 >
-                  <Icon size={18} className="shrink-0" />
-                  {!collapsed && <span className="truncate">{label}</span>}
+                  {({ isActive }) => (
+                    <>
+                      {isActive && (
+                        <motion.span
+                          layoutId="sidebar-active-indicator"
+                          className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-white/60 rounded-r"
+                        />
+                      )}
+                      <Icon size={17} className="shrink-0" />
+                      <AnimatePresence initial={false}>
+                        {!collapsed && (
+                          <motion.span
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.1 }}
+                            className="truncate"
+                          >
+                            {label}
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
+                    </>
+                  )}
                 </NavLink>
               </Tooltip.Trigger>
               {collapsed && (
                 <Tooltip.Portal>
                   <Tooltip.Content
                     side="right"
-                    className="z-50 bg-slate-900 text-white text-xs px-2.5 py-1.5 rounded shadow-md"
+                    sideOffset={8}
+                    className="z-50 bg-slate-900 text-white text-xs px-2.5 py-1.5 rounded-lg shadow-lg"
                   >
                     {label}
                     <Tooltip.Arrow className="fill-slate-900" />
@@ -90,15 +121,29 @@ export default function Sidebar() {
 
         {/* Botão colapsar */}
         <div className="border-t border-slate-100 p-2">
-          <button
-            onClick={() => setCollapsed((c) => !c)}
-            className="w-full flex items-center justify-center gap-2 px-2.5 py-2 rounded-lg text-slate-500 hover:bg-slate-100 hover:text-slate-700 text-sm transition-colors"
-            title={collapsed ? 'Expandir sidebar' : 'Recolher sidebar'}
-          >
-            {collapsed ? <ChevronRight size={16} /> : <><ChevronLeft size={16} /><span>Recolher</span></>}
-          </button>
+          <Tooltip.Root>
+            <Tooltip.Trigger asChild>
+              <button
+                onClick={() => setCollapsed((c) => !c)}
+                className="w-full flex items-center justify-center p-2 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors"
+                aria-label={collapsed ? 'Expandir sidebar' : 'Recolher sidebar'}
+              >
+                {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+              </button>
+            </Tooltip.Trigger>
+            <Tooltip.Portal>
+              <Tooltip.Content
+                side="right"
+                sideOffset={8}
+                className="z-50 bg-slate-900 text-white text-xs px-2.5 py-1.5 rounded-lg shadow-lg"
+              >
+                {collapsed ? 'Expandir' : 'Recolher'}
+                <Tooltip.Arrow className="fill-slate-900" />
+              </Tooltip.Content>
+            </Tooltip.Portal>
+          </Tooltip.Root>
         </div>
-      </aside>
+      </motion.aside>
     </Tooltip.Provider>
   )
 }
