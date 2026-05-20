@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { Search, MessageCircleQuestion } from 'lucide-react'
+import { cn } from '../lib/utils'
 import Accordion from '../components/ui/Accordion'
 import { faqItems } from '../content/faq'
 
@@ -20,32 +22,38 @@ export default function FAQ() {
   })
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
-      <div className="mb-8">
-        <h1 className="text-3xl font-extrabold text-unb-texto">Perguntas Frequentes</h1>
-        <p className="text-gray-500 mt-2">
+    <div className="max-w-3xl mx-auto space-y-6">
+      {/* Cabeçalho */}
+      <div>
+        <h1 className="text-2xl font-bold text-slate-900">Perguntas Frequentes</h1>
+        <p className="text-slate-500 mt-1 text-sm">
           Respostas diretas para as dúvidas mais comuns dos estudantes do EPR/UnB.
         </p>
       </div>
 
-      <div className="mb-6 space-y-3">
-        <input
-          type="search"
-          placeholder="Buscar nas perguntas..."
-          value={busca}
-          onChange={(e) => setBusca(e.target.value)}
-          className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-unb-azul focus:outline-none transition-colors text-sm"
-        />
-        <div className="flex flex-wrap gap-2">
+      {/* Busca + filtros */}
+      <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-sm space-y-3">
+        <div className="relative">
+          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          <input
+            type="search"
+            placeholder="Buscar nas perguntas..."
+            value={busca}
+            onChange={(e) => setBusca(e.target.value)}
+            className="w-full pl-9 pr-4 py-2.5 rounded-lg border border-slate-200 focus:border-unb-azul focus:outline-none text-sm transition-colors bg-slate-50 focus:bg-white"
+          />
+        </div>
+        <div className="flex flex-wrap gap-1.5">
           {categorias.map((cat) => (
             <button
               key={cat}
               onClick={() => setCategoria(cat)}
-              className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+              className={cn(
+                'px-3 py-1 rounded-full text-xs font-medium transition-colors',
                 categoria === cat
                   ? 'bg-unb-azul text-white'
-                  : 'bg-white text-gray-600 border border-gray-200 hover:border-unb-azul hover:text-unb-azul'
-              }`}
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              )}
             >
               {cat}
             </button>
@@ -53,28 +61,44 @@ export default function FAQ() {
         </div>
       </div>
 
+      {/* Contador de resultados */}
+      {(busca || categoria !== 'Todas') && (
+        <p className="text-xs text-slate-500">
+          {filtrados.length} {filtrados.length === 1 ? 'resultado' : 'resultados'} encontrados
+        </p>
+      )}
+
+      {/* Lista */}
       {filtrados.length === 0 ? (
-        <div className="text-center py-12 text-gray-400">
-          <p className="text-4xl mb-3">🔍</p>
-          <p>Nenhuma pergunta encontrada para esta busca.</p>
+        <div className="bg-white rounded-xl border border-slate-200 p-10 text-center">
+          <MessageCircleQuestion size={32} className="text-slate-300 mx-auto mb-3" />
+          <p className="text-sm text-slate-500">Nenhuma pergunta encontrada.</p>
+          <button
+            onClick={() => { setBusca(''); setCategoria('Todas') }}
+            className="mt-3 text-xs text-unb-azul hover:underline"
+          >
+            Limpar filtros
+          </button>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-2">
           {filtrados.map((item, i) => (
             <Accordion key={i} item={item} />
           ))}
         </div>
       )}
 
-      <div className="mt-10 bg-unb-azul-pale rounded-2xl p-6 text-center">
-        <p className="text-unb-texto font-medium">Sua dúvida não está aqui?</p>
-        <p className="text-gray-600 text-sm mt-1">
-          Entre em contato com a secretaria do EPR:{' '}
-          <a href="mailto:epr@unb.br" className="text-unb-azul font-medium hover:underline">
-            epr@unb.br
-          </a>
-          {' '}| (61) 3107-5678
-        </p>
+      {/* Contato */}
+      <div className="rounded-xl bg-unb-azul-pale border border-blue-100 p-4 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+        <MessageCircleQuestion size={20} className="text-unb-azul shrink-0" />
+        <div>
+          <p className="text-sm font-semibold text-slate-800">Sua dúvida não está aqui?</p>
+          <p className="text-xs text-slate-600 mt-0.5">
+            Secretaria do EPR:{' '}
+            <a href="mailto:epr@unb.br" className="text-unb-azul font-medium hover:underline">epr@unb.br</a>
+            {' '}· (61) 3107-5678 · Seg–Sex 7h–23h
+          </p>
+        </div>
       </div>
     </div>
   )

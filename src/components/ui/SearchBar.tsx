@@ -1,12 +1,21 @@
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Search } from 'lucide-react'
+import { cn } from '../../lib/utils'
 import { useSearch } from '../../hooks/useSearch'
 
 const tipoLabel: Record<string, string> = {
   faq:          'FAQ',
   tema:         'Tema',
-  procedimento: 'Procedimento',
+  procedimento: 'Guia',
   link:         'Link',
+}
+
+const tipoColor: Record<string, string> = {
+  faq:          'bg-blue-100 text-blue-700',
+  tema:         'bg-purple-100 text-purple-700',
+  procedimento: 'bg-green-100 text-green-700',
+  link:         'bg-slate-100 text-slate-600',
 }
 
 export default function SearchBar() {
@@ -24,11 +33,9 @@ export default function SearchBar() {
   const showDropdown = focused && query.length >= 2
 
   return (
-    <div className="relative w-full max-w-2xl mx-auto">
+    <div className="relative w-full">
       <div className="relative">
-        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg">
-          🔍
-        </span>
+        <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
         <input
           ref={inputRef}
           type="search"
@@ -37,29 +44,29 @@ export default function SearchBar() {
           onFocus={() => setFocused(true)}
           onBlur={() => setTimeout(() => setFocused(false), 150)}
           placeholder="Buscar: estágio, trancamento, IRA, atividades..."
-          className="w-full pl-11 pr-4 py-3.5 text-base rounded-xl border-2 border-gray-200 bg-white shadow-sm focus:outline-none focus:border-unb-azul transition-colors"
+          className="w-full pl-9 pr-4 py-2.5 text-sm rounded-lg border border-slate-200 bg-white focus:outline-none focus:border-unb-azul focus:ring-2 focus:ring-unb-azul/10 transition-all"
           aria-label="Buscar no EPR Info Hub"
         />
       </div>
 
       {showDropdown && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden z-50">
+        <div className="absolute top-full left-0 right-0 mt-1.5 bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden z-50">
           {results.length === 0 ? (
-            <p className="px-4 py-3 text-gray-500 text-sm">
+            <p className="px-4 py-3 text-sm text-slate-500">
               Nenhum resultado para "{query}"
             </p>
           ) : (
-            <ul>
+            <ul className="divide-y divide-slate-50">
               {results.map((item) => (
                 <li key={item.id}>
                   <button
                     onMouseDown={() => handleSelect(item.rota)}
-                    className="w-full text-left px-4 py-3 hover:bg-unb-azul-pale flex items-start gap-3 transition-colors"
+                    className="w-full text-left px-3.5 py-2.5 hover:bg-slate-50 flex items-center gap-2.5 transition-colors"
                   >
-                    <span className="text-xs font-medium text-unb-azul bg-unb-azul-pale px-2 py-0.5 rounded mt-0.5 flex-shrink-0">
+                    <span className={cn('text-xs font-medium px-2 py-0.5 rounded shrink-0', tipoColor[item.tipo] ?? 'bg-slate-100 text-slate-600')}>
                       {tipoLabel[item.tipo]}
                     </span>
-                    <span className="text-sm text-unb-texto">{item.titulo}</span>
+                    <span className="text-sm text-slate-700 truncate">{item.titulo}</span>
                   </button>
                 </li>
               ))}
