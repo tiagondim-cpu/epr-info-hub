@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-unb-azul:        #003366;
+  --color-unb-azul-light:  #1a4d80;
+  --color-unb-azul-pale:   #e8eef5;
+  --color-unb-verde:       #006633;
+  --color-unb-verde-light: #1a7a47;
+  --color-unb-verde-pale:  #e6f2ec;
+  --color-unb-cinza:       #f5f5f5;
+  --color-unb-texto:       #1a1a2e;
+  --color-unb-alerta:      #c0392b;
+  --color-unb-aviso:       #e67e22;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-unb-cinza);
+    color: var(--color-unb-texto);
+    margin: 0;
+    font-family: var(--font-sans);
+  }
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+}
