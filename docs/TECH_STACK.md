@@ -18,8 +18,9 @@ O EPR Info Hub é uma **Single Page Application (SPA) estática**, sem backend p
 | Ícones | lucide-react | latest |
 | Roteamento | React Router | 7.x |
 | Busca | Fuse.js | 7.x |
+| PWA | vite-plugin-pwa | latest |
 | Hospedagem | Vercel | — |
-| CI/CD | GitHub Actions | planejado |
+| CI/CD | GitHub Actions + Vercel | configurado |
 | Controle de versão | Git + GitHub | — |
 
 ---
@@ -205,7 +206,13 @@ sequenceDiagram
 - `main` → deploy automático em produção
 - qualquer outra branch → URL de preview isolada
 
-> **GitHub Actions** não está configurado ainda — o CI/CD é gerenciado diretamente pelo Vercel via webhook. GitHub Actions está planejado para a Fase 4 (validação automática de links e lint).
+> **GitHub Actions** está configurado em `.github/workflows/`:
+> - `ci.yml` — lint (ESLint) + build (tsc + Vite) a cada push/PR para `main`.
+> - `links.yml` — validação semanal dos links externos (lychee), abrindo uma issue
+>   automática quando algum link oficial quebra.
+>
+> O deploy contínuo segue gerenciado pelo Vercel via webhook (preview por branch,
+> produção em `main`).
 
 ---
 

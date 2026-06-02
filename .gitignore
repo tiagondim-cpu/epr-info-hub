@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Logo UnB solto na raiz (duplicado — o canônico é public/unb-logo.png)
+Webysther_20160322_-_Logo_UnB.svg.png

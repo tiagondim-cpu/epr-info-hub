@@ -2,14 +2,23 @@
 @import "tailwindcss";
 
 @theme {
+  --color-surface:         #ffffff;
+  --color-surface-muted:   #f9fafb;
+  --color-nav-active:      #f0f0f0;
+  --color-text-primary:    #1a1a1a;
+  --color-text-muted:      #4b5563;
+  --color-text-subtle:     #6b7280;
+  --color-border:          #e5e7eb;
+  --color-divider:         #f3f4f6;
+  --color-accent:          #6b4eff;
   --color-unb-azul:        #003366;
   --color-unb-azul-light:  #1a4d80;
   --color-unb-azul-pale:   #e8eef5;
   --color-unb-verde:       #006633;
   --color-unb-verde-light: #1a7a47;
   --color-unb-verde-pale:  #e6f2ec;
-  --color-unb-cinza:       #f8fafc;
-  --color-unb-texto:       #0f172a;
+  --color-unb-cinza:       #f9fafb;
+  --color-unb-texto:       #1a1a1a;
   --color-unb-alerta:      #c0392b;
   --color-unb-aviso:       #e67e22;
   --font-sans: 'Inter', system-ui, sans-serif;
@@ -22,8 +31,8 @@
   }
 
   body {
-    background-color: #f8fafc;
-    color: var(--color-unb-texto);
+    background-color: var(--color-surface-muted);
+    color: var(--color-text-primary);
     margin: 0;
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
@@ -32,11 +41,12 @@
 
   #root {
     min-height: 100vh;
+    width: 100%;
     display: flex;
   }
 
   *:focus-visible {
-    outline: 2px solid var(--color-unb-azul);
+    outline: 2px solid var(--color-accent);
     outline-offset: 2px;
   }
 

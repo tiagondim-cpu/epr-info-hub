@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ExternalLink, CheckCircle2 } from 'lucide-react'
 import { cn } from '../lib/utils'
 import Badge from '../components/ui/Badge'
+import AtualizadoEm from '../components/ui/AtualizadoEm'
 import { jornadaFases } from '../content/jornada'
 
 const cardVariants = {
@@ -27,42 +28,40 @@ export default function Jornada() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 animate-page-enter">
+    <div className="mx-auto max-w-5xl space-y-7 animate-page-enter">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Minha Jornada Acadêmica</h1>
-        <p className="text-slate-500 mt-1 text-sm">
-          Informações organizadas por fase do curso — do primeiro semestre à formatura.
+        <h1 className="text-[30px] font-bold leading-tight text-text-primary lg:text-[32px]">
+          Minha Jornada Acadêmica
+        </h1>
+        <p className="mt-2 text-base text-text-muted">
+          Informações organizadas por fase do curso, do primeiro semestre à formatura.
         </p>
+        <AtualizadoEm area="jornada" className="mt-3" />
       </div>
 
-      {/* Tabs */}
-      <div className="bg-white rounded-xl border border-slate-200 p-1 shadow-sm flex flex-wrap gap-1">
+      <div className="flex flex-wrap gap-2 rounded-xl border border-border bg-surface p-2 shadow-sm">
         {jornadaFases.map((f, i) => (
           <button
             key={f.id}
             onClick={() => handleFase(f.id)}
             className={cn(
-              'relative flex-1 min-w-[110px] flex flex-col items-center px-3 py-2.5 rounded-lg text-xs font-medium transition-all',
+              'min-w-[128px] flex-1 rounded-full border px-4 py-2.5 text-sm font-semibold transition-all',
               faseAtiva === f.id
-                ? 'bg-unb-azul text-white shadow-sm'
-                : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800'
+                ? 'border-text-primary bg-text-primary text-white shadow-sm'
+                : 'border-border bg-surface text-text-muted hover:border-text-subtle hover:text-text-primary'
             )}
           >
-            <span className={cn(
-              'w-5 h-5 rounded-full text-[10px] flex items-center justify-center font-bold mb-1',
-              faseAtiva === f.id ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500'
-            )}>
+            <span className="mr-2 inline-flex h-5 w-5 items-center justify-center rounded-full bg-white/15 text-[10px] font-bold">
               {i + 1}
             </span>
-            <span className="leading-tight text-center">{f.titulo}</span>
-            <span className={cn('text-[10px] mt-0.5', faseAtiva === f.id ? 'text-blue-200' : 'text-slate-400')}>
+            {f.titulo}
+            <span className={cn('ml-2 text-xs font-medium', faseAtiva === f.id ? 'text-white/80' : 'text-text-subtle')}>
               {f.semestres}
             </span>
           </button>
         ))}
       </div>
 
-      {/* Conteúdo animado */}
       <AnimatePresence mode="wait" custom={direction}>
         <motion.div
           key={faseAtiva}
@@ -71,7 +70,7 @@ export default function Jornada() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: direction * -20 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
-          className="space-y-3"
+          className="space-y-4"
         >
           {fase.conteudo.map((faseItem, i) => (
             <motion.div
@@ -80,12 +79,12 @@ export default function Jornada() {
               variants={cardVariants}
               initial="hidden"
               animate="show"
-              className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm"
+              className="rounded-xl border border-border bg-surface p-6 shadow-sm"
             >
-              <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
-                <h3 className="text-sm font-semibold text-slate-900">{faseItem.titulo}</h3>
+              <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
+                <h3 className="text-base font-semibold text-text-primary">{faseItem.titulo}</h3>
                 {faseItem.badges && faseItem.badges.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap gap-2">
                     {faseItem.badges.map((badge, j) => (
                       <Badge key={j} {...badge} />
                     ))}
@@ -93,13 +92,13 @@ export default function Jornada() {
                 )}
               </div>
 
-              <p className="text-sm text-slate-600 leading-relaxed">{faseItem.descricao}</p>
+              <p className="text-sm leading-relaxed text-text-muted">{faseItem.descricao}</p>
 
               {faseItem.detalhes && faseItem.detalhes.length > 0 && (
-                <ul className="mt-3 space-y-1.5">
+                <ul className="mt-4 space-y-2">
                   {faseItem.detalhes.map((detalhe, j) => (
-                    <li key={j} className="flex items-start gap-2 text-sm text-slate-600">
-                      <CheckCircle2 size={14} className="text-unb-verde shrink-0 mt-0.5" />
+                    <li key={j} className="flex items-start gap-2 text-sm text-text-muted">
+                      <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-unb-verde" />
                       <span>{detalhe}</span>
                     </li>
                   ))}
@@ -107,17 +106,17 @@ export default function Jornada() {
               )}
 
               {faseItem.links && faseItem.links.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-4 pt-3 border-t border-slate-100">
+                <div className="mt-5 flex flex-wrap gap-2 border-t border-divider pt-4">
                   {faseItem.links.map((link) => (
                     <a
                       key={link.url}
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-medium text-unb-azul bg-unb-azul-pale px-3 py-1.5 rounded-lg hover:bg-blue-100 transition-colors"
+                      className="inline-flex items-center gap-1.5 rounded-lg bg-unb-azul-pale px-3 py-1.5 text-xs font-semibold text-unb-azul transition-colors hover:bg-blue-100"
                     >
                       {link.texto}
-                      <ExternalLink size={11} />
+                      <ExternalLink size={12} />
                     </a>
                   ))}
                 </div>

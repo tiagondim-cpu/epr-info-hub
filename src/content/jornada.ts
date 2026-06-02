@@ -201,7 +201,7 @@ export const jornadaFases: JornadaFase[] = [
         links: [
           {
             texto: 'Formulário de Inscrição',
-            url: 'http://epr.unb.br/index.php/solicitacoes/estagios',
+            url: 'http://epr.unb.br/index.php/solicitacoes/estagios/estagio-obrigatorio',
           },
         ],
       },

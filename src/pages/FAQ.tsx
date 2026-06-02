@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Search, MessageCircleQuestion } from 'lucide-react'
 import { cn } from '../lib/utils'
 import Accordion from '../components/ui/Accordion'
+import AtualizadoEm from '../components/ui/AtualizadoEm'
 import { faqItems } from '../content/faq'
 
 const categorias = ['Todas', 'Estágio', 'Trancamento', 'IRA', 'Atividades', 'Desligamento', 'Prazos']
@@ -23,40 +24,39 @@ export default function FAQ() {
   })
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6 animate-page-enter">
-      {/* Cabeçalho */}
+    <div className="mx-auto max-w-4xl space-y-7 animate-page-enter">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">
+        <h1 className="text-[30px] font-bold leading-tight text-text-primary lg:text-[32px]">
           Perguntas Frequentes
-          <span className="text-sm font-normal text-slate-400 ml-2">({faqItems.length} perguntas)</span>
+          <span className="ml-2 align-middle text-sm font-medium text-text-subtle">({faqItems.length} perguntas)</span>
         </h1>
-        <p className="text-slate-500 mt-1 text-sm">
+        <p className="mt-2 text-base text-text-muted">
           Respostas diretas para as dúvidas mais comuns dos estudantes do EPR/UnB.
         </p>
+        <AtualizadoEm area="faq" className="mt-3" />
       </div>
 
-      {/* Busca + filtros */}
-      <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-sm space-y-3">
+      <div className="space-y-4 rounded-xl border border-border bg-surface p-5 shadow-sm">
         <div className="relative">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-text-subtle" />
           <input
             type="search"
             placeholder="Buscar nas perguntas..."
             value={busca}
             onChange={(e) => setBusca(e.target.value)}
-            className="w-full pl-8 pr-4 py-2 rounded-lg border border-slate-200 focus:border-unb-azul focus:outline-none focus:ring-2 focus:ring-unb-azul/10 text-sm transition-all bg-slate-50 focus:bg-white"
+            className="w-full rounded-xl border border-border bg-surface-muted py-3 pl-10 pr-4 text-sm text-text-primary placeholder:text-text-subtle transition-all focus:border-accent focus:bg-surface focus:outline-none focus:ring-2 focus:ring-accent/15"
           />
         </div>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-2">
           {categorias.map((cat) => (
             <button
               key={cat}
               onClick={() => setCategoria(cat)}
               className={cn(
-                'px-2.5 py-1 rounded-full text-xs font-medium transition-all',
+                'rounded-full border px-3.5 py-1.5 text-sm font-semibold transition-all',
                 categoria === cat
-                  ? 'bg-unb-azul text-white shadow-sm'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  ? 'border-text-primary bg-text-primary text-white shadow-sm'
+                  : 'border-border bg-surface text-text-muted hover:border-text-subtle hover:text-text-primary'
               )}
             >
               {cat}
@@ -65,14 +65,12 @@ export default function FAQ() {
         </div>
       </div>
 
-      {/* Contador */}
       {(busca || categoria !== 'Todas') && (
-        <p className="text-xs text-slate-400">
+        <p className="text-sm text-text-muted">
           {filtrados.length} {filtrados.length === 1 ? 'resultado' : 'resultados'}
         </p>
       )}
 
-      {/* Lista com animação */}
       <AnimatePresence mode="wait">
         {filtrados.length === 0 ? (
           <motion.div
@@ -80,13 +78,13 @@ export default function FAQ() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="bg-white rounded-xl border border-slate-200 p-12 text-center"
+            className="rounded-xl border border-border bg-surface p-12 text-center"
           >
-            <MessageCircleQuestion size={36} className="text-slate-200 mx-auto mb-3" />
-            <p className="text-sm font-medium text-slate-500">Nenhuma pergunta encontrada.</p>
+            <MessageCircleQuestion size={40} className="mx-auto mb-4 text-text-subtle" />
+            <p className="text-sm font-semibold text-text-muted">Nenhuma pergunta encontrada.</p>
             <button
               onClick={() => { setBusca(''); setCategoria('Todas') }}
-              className="mt-3 text-xs text-unb-azul hover:underline"
+              className="mt-3 text-sm font-semibold text-unb-azul hover:underline"
             >
               Limpar filtros
             </button>
@@ -98,7 +96,7 @@ export default function FAQ() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="space-y-2"
+            className="space-y-3"
           >
             {filtrados.map((faqItem, i) => (
               <motion.div
@@ -114,14 +112,13 @@ export default function FAQ() {
         )}
       </AnimatePresence>
 
-      {/* Contato */}
-      <div className="rounded-xl bg-unb-azul-pale border border-blue-100 p-4 flex items-start gap-3">
-        <MessageCircleQuestion size={18} className="text-unb-azul shrink-0 mt-0.5" />
+      <div className="flex items-start gap-3 rounded-xl border border-border bg-surface p-5">
+        <MessageCircleQuestion size={20} className="mt-0.5 shrink-0 text-unb-azul" />
         <div>
-          <p className="text-sm font-semibold text-slate-800">Sua dúvida não está aqui?</p>
-          <p className="text-xs text-slate-600 mt-0.5">
+          <p className="text-sm font-semibold text-text-primary">Sua dúvida não está aqui?</p>
+          <p className="mt-1 text-sm text-text-muted">
             Secretaria do EPR:{' '}
-            <a href="mailto:epr@unb.br" className="text-unb-azul font-medium hover:underline">epr@unb.br</a>
+            <a href="mailto:epr@unb.br" className="font-semibold text-unb-azul hover:underline">epr@unb.br</a>
             {' '}· (61) 3107-5678
           </p>
         </div>

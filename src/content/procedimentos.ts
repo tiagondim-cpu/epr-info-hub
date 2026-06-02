@@ -84,7 +84,7 @@ export const procedimentos: Procedimento[] = [
         numero: 2,
         titulo: 'Acesse o formulário no site do EPR',
         descricao:
-          'Acesse http://epr.unb.br/index.php/solicitacoes/estagios e localize o formulário de inscrição do semestre atual. Não use outros meios de inscrição.',
+          'Acesse http://epr.unb.br/index.php/solicitacoes/estagios/estagio-obrigatorio e localize o formulário de inscrição do semestre atual. Não use outros meios de inscrição.',
       },
       {
         numero: 3,
@@ -119,7 +119,7 @@ export const procedimentos: Procedimento[] = [
     links: [
       {
         texto: 'Formulário de Estágio (site EPR)',
-        url: 'http://epr.unb.br/index.php/solicitacoes/estagios',
+        url: 'http://epr.unb.br/index.php/solicitacoes/estagios/estagio-obrigatorio',
       },
       { texto: 'SIGAA', url: 'https://sigaa.unb.br' },
     ],

@@ -15,7 +15,7 @@ export const links: LinkItem[] = [
   },
   {
     nome: 'Inscrição no Estágio Obrigatório',
-    url: 'http://epr.unb.br/index.php/solicitacoes/estagios',
+    url: 'http://epr.unb.br/index.php/solicitacoes/estagios/estagio-obrigatorio',
     descricao: 'Formulário de inscrição no Estágio Supervisionado Obrigatório do EPR',
     categoria: 'formulario',
   },
@@ -75,7 +75,7 @@ export const links: LinkItem[] = [
   },
   {
     nome: 'FAQ Geral SAA',
-    url: 'https://saa.unb.br/faq-geral',
+    url: 'https://saa.unb.br/perguntas-frequentes/',
     descricao: 'Perguntas frequentes sobre procedimentos acadêmicos gerais da UnB',
     categoria: 'secretaria',
   },

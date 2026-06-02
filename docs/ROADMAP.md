@@ -127,12 +127,17 @@ Validar o produto com usuários reais (estudantes do EPR), corrigir problemas id
 ### Entregáveis
 - [ ] Aplicação do **System Usability Scale (SUS)** com ao menos 5 estudantes do EPR
   - Meta: pontuação SUS >= 75 (superior ao SEI: 59,78)
-  - Template do questionário incluído no repositório
+  - [x] Template do questionário incluído no repositório (`docs/SUS_QUESTIONARIO.md`)
 - [ ] Relatório de usabilidade com problemas identificados e correções realizadas
+  - [x] Modelo de relatório incluído no repositório (`docs/RELATORIO_USABILIDADE.md`)
 - [ ] Ajustes de conteúdo e navegação baseados no feedback
 - [ ] URL de produção no Vercel estável e verificada
-- [ ] README.md no repositório com: o que é, como rodar localmente, como atualizar conteúdo
+- [x] README.md no repositório com: o que é, como rodar localmente, como atualizar conteúdo
 - [ ] Apresentação do produto ao Prof. Marcelo com demonstração ao vivo
+- [x] Repositório publicado no GitHub (backup, colaboração, pré-requisito da Fase 5)
+- [x] GitHub Actions: CI (lint + build) e validação semanal de links externos
+- [x] Selo "Última atualização" por área de conteúdo (`src/content/meta.ts`)
+- [x] PWA básica: app instalável e com acesso offline (`vite-plugin-pwa`)
 
 ### Critérios de conclusão
 - [ ] URL pública acessível e estável

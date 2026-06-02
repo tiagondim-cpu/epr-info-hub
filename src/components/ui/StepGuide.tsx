@@ -6,34 +6,34 @@ interface Props {
 
 export default function StepGuide({ procedimento }: Props) {
   return (
-    <article className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-      <div className="bg-unb-azul px-6 py-5">
-        <h2 className="text-xl font-bold text-white">{procedimento.titulo}</h2>
-        <p className="text-blue-200 text-sm mt-1">{procedimento.descricao}</p>
+    <article className="overflow-hidden rounded-xl border border-border bg-surface shadow-sm">
+      <div className="border-b border-divider bg-surface-muted px-6 py-5">
+        <h2 className="text-xl font-bold text-text-primary">{procedimento.titulo}</h2>
+        <p className="mt-1 text-sm text-text-muted">{procedimento.descricao}</p>
       </div>
 
       <div className="p-6">
-        <ol className="space-y-4">
+        <ol className="space-y-5">
           {procedimento.passos.map((passo) => (
             <li key={passo.numero} className="flex gap-4">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-unb-azul text-white text-sm font-bold flex items-center justify-center">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-text-primary text-sm font-bold text-white">
                 {passo.numero}
               </div>
               <div className="flex-1 pt-0.5">
-                <h3 className="font-semibold text-unb-texto">{passo.titulo}</h3>
-                <p className="text-gray-600 text-sm mt-1 leading-relaxed">{passo.descricao}</p>
+                <h3 className="font-semibold text-text-primary">{passo.titulo}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-text-muted">{passo.descricao}</p>
               </div>
             </li>
           ))}
         </ol>
 
         {procedimento.observacoes && procedimento.observacoes.length > 0 && (
-          <div className="mt-6 bg-amber-50 border border-amber-200 rounded-xl p-4">
-            <p className="text-sm font-semibold text-amber-800 mb-2">Observacoes importantes</p>
+          <div className="mt-6 rounded-xl border border-amber-200 bg-amber-50 p-4">
+            <p className="mb-2 text-sm font-semibold text-amber-800">Observações importantes</p>
             <ul className="space-y-1">
               {procedimento.observacoes.map((obs, i) => (
-                <li key={i} className="text-sm text-amber-700 flex gap-2">
-                  <span className="flex-shrink-0">•</span>
+                <li key={i} className="flex gap-2 text-sm text-amber-800">
+                  <span className="shrink-0">•</span>
                   <span>{obs}</span>
                 </li>
               ))}
@@ -49,7 +49,7 @@ export default function StepGuide({ procedimento }: Props) {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-unb-azul bg-unb-azul-pale px-3 py-1.5 rounded-lg hover:bg-blue-100 transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-unb-azul-pale px-3 py-1.5 text-sm font-medium text-unb-azul transition-colors hover:bg-blue-100"
               >
                 {link.texto} →
               </a>

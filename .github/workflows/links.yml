@@ -1,0 +1,47 @@
+name: Validação de Links Externos
+
+# Verifica semanalmente se os links oficiais (UnB, SEI, SIGAA, etc.) continuam
+# no ar. Abre/atualiza uma issue automaticamente quando algum link quebra.
+on:
+  schedule:
+    # Toda segunda-feira às 09:00 UTC (06:00 em Brasília).
+    - cron: '0 9 * * 1'
+  workflow_dispatch: # permite rodar manualmente pela aba Actions
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  link-check:
+    name: Checar links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Rodar lychee
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # Extrai e testa as URLs do conteúdo, docs e README.
+          args: >-
+            --verbose
+            --no-progress
+            --max-retries 2
+            --accept 200,206,429
+            "src/content/**/*.ts"
+            "docs/**/*.md"
+            "README.md"
+          output: ./lychee-report.md
+          fail: false
+
+      - name: Abrir/atualizar issue em caso de link quebrado
+        if: steps.lychee.outputs.exit_code != 0
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: '🔗 Links externos quebrados detectados'
+          content-filepath: ./lychee-report.md
+          labels: |
+            links
+            manutenção
