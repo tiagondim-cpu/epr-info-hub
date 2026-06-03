@@ -9,6 +9,9 @@ export const conteudoAtualizadoEm = {
   procedimentos: '2026-05',
   faq: '2026-05',
   links: '2026-05',
+  calouro: '2026-06',
+  calendario: '2026-06',
+  fluxo: '2026-06',
 } as const
 
 export type ConteudoArea = keyof typeof conteudoAtualizadoEm

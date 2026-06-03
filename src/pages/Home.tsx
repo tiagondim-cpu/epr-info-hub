@@ -1,7 +1,18 @@
 import type { ComponentType } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowRight, Briefcase, Star, Lock, Clock, AlertTriangle, BarChart2 } from 'lucide-react'
+import {
+  ArrowRight,
+  Briefcase,
+  Star,
+  Lock,
+  Clock,
+  AlertTriangle,
+  BarChart2,
+  Rocket,
+  CalendarDays,
+  Network,
+} from 'lucide-react'
 import SearchBar from '../components/ui/SearchBar'
 import Badge from '../components/ui/Badge'
 import { temaCards } from '../content/temas'
@@ -24,6 +35,27 @@ const jornadaItems = [
   { label: 'Meio', hash: 'meio', num: '5–8', desc: 'semestre' },
   { label: 'Final', hash: 'final', num: '9–12', desc: 'semestre' },
   { label: 'Risco', hash: 'risco', num: '!', desc: 'urgente' },
+]
+
+const secretariaItems = [
+  {
+    label: 'Primeiros Passos',
+    to: '/primeiros-passos',
+    desc: 'Orientações iniciais para calouros de Produção.',
+    icon: Rocket,
+  },
+  {
+    label: 'Calendário Acadêmico',
+    to: '/calendario',
+    desc: 'Datas-chave do semestre com link para a SAA.',
+    icon: CalendarDays,
+  },
+  {
+    label: 'Fluxo do Curso',
+    to: '/fluxo',
+    desc: 'Grade por semestre e fontes oficiais do currículo.',
+    icon: Network,
+  },
 ]
 
 const container = {
@@ -68,6 +100,32 @@ export default function Home() {
 
         <SearchBar />
       </div>
+
+      <section>
+        <h2 className="mb-4 text-xs font-bold uppercase text-text-subtle">Demandas da secretaria</h2>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {secretariaItems.map(({ label, to, desc, icon: Icon }) => (
+            <Link
+              key={to}
+              to={to}
+              className="group flex h-full flex-col gap-4 rounded-xl border border-border bg-surface p-5 transition-all hover:border-text-subtle hover:shadow-md"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-unb-azul-pale transition-colors group-hover:bg-nav-active">
+                    <Icon size={18} className="text-unb-azul" />
+                  </div>
+                  <h3 className="text-base font-semibold leading-tight text-text-primary transition-colors group-hover:text-unb-azul">
+                    {label}
+                  </h3>
+                </div>
+                <ArrowRight size={16} className="mt-1 shrink-0 text-text-subtle transition-all group-hover:translate-x-0.5 group-hover:text-unb-azul" />
+              </div>
+              <p className="text-sm leading-relaxed text-text-muted">{desc}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       <section>
         <h2 className="mb-4 text-xs font-bold uppercase text-text-subtle">Temas principais</h2>

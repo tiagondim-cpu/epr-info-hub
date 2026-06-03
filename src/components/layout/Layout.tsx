@@ -8,6 +8,9 @@ const pageTitles: Record<string, string> = {
   '/faq':           'FAQ',
   '/procedimentos': 'Procedimentos',
   '/links':         'Links Úteis',
+  '/primeiros-passos': 'Primeiros Passos',
+  '/calendario':       'Calendário Acadêmico',
+  '/fluxo':            'Fluxo do Curso',
 }
 
 export default function Layout() {
