@@ -17,6 +17,13 @@ export interface Passo {
   descricao: string
 }
 
+export interface PassoCalouro {
+  numero: number
+  titulo: string
+  descricao: string
+  link?: { texto: string; url: string }
+}
+
 export interface Procedimento {
   id: string
   titulo: string
@@ -31,6 +38,26 @@ export interface LinkItem {
   url: string
   descricao: string
   categoria: 'secretaria' | 'sistema' | 'formulario' | 'regulamento'
+}
+
+export interface DataAcademica {
+  titulo: string
+  inicio: string
+  fim?: string
+  tipo: BadgeTipo
+  descricao?: string
+}
+
+export interface Disciplina {
+  codigo: string
+  nome: string
+  creditos: number
+  tipo: 'obrigatoria' | 'optativa' | 'modulo-livre'
+}
+
+export interface SemestreFluxo {
+  numero: number
+  disciplinas: Disciplina[]
 }
 
 export interface TemaCard {
@@ -61,7 +88,7 @@ export interface JornadaItem {
 
 export interface SearchableItem {
   id: string
-  tipo: 'faq' | 'tema' | 'procedimento' | 'link'
+  tipo: 'faq' | 'tema' | 'procedimento' | 'link' | 'calouro' | 'calendario' | 'fluxo'
   titulo: string
   conteudo: string
   rota: string

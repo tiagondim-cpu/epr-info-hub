@@ -9,6 +9,9 @@ import {
   HelpCircle,
   ClipboardList,
   Link2,
+  Rocket,
+  CalendarDays,
+  Network,
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react'
@@ -18,6 +21,9 @@ const navItems = [
   { to: '/jornada', label: 'Minha Jornada', icon: GraduationCap },
   { to: '/faq', label: 'FAQ', icon: HelpCircle },
   { to: '/procedimentos', label: 'Procedimentos', icon: ClipboardList },
+  { to: '/primeiros-passos', label: 'Primeiros Passos', icon: Rocket },
+  { to: '/calendario', label: 'Calendário', icon: CalendarDays },
+  { to: '/fluxo', label: 'Fluxo do Curso', icon: Network },
   { to: '/links', label: 'Links Úteis', icon: Link2 },
 ]
 

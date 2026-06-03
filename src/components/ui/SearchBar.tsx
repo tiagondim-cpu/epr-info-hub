@@ -9,6 +9,9 @@ const tipoLabel: Record<string, string> = {
   tema: 'Tema',
   procedimento: 'Guia',
   link: 'Link',
+  calouro: 'Calouro',
+  calendario: 'Calendário',
+  fluxo: 'Fluxo',
 }
 
 const tipoColor: Record<string, string> = {
@@ -16,6 +19,9 @@ const tipoColor: Record<string, string> = {
   tema: 'bg-purple-100 text-purple-700 border-purple-200',
   procedimento: 'bg-green-50 text-green-700 border-green-200',
   link: 'bg-surface-muted text-text-muted border-border',
+  calouro: 'bg-blue-50 text-blue-700 border-blue-200',
+  calendario: 'bg-orange-50 text-orange-700 border-orange-200',
+  fluxo: 'bg-green-50 text-green-700 border-green-200',
 }
 
 export default function SearchBar() {

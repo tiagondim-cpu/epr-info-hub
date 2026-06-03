@@ -8,6 +8,9 @@ import {
   HelpCircle,
   ClipboardList,
   Link2,
+  Rocket,
+  CalendarDays,
+  Network,
   Menu,
   X,
 } from 'lucide-react'
@@ -17,6 +20,9 @@ const navItems = [
   { to: '/jornada', label: 'Minha Jornada', icon: GraduationCap, desc: 'Por fase do curso' },
   { to: '/faq', label: 'FAQ', icon: HelpCircle, desc: 'Perguntas frequentes' },
   { to: '/procedimentos', label: 'Procedimentos', icon: ClipboardList, desc: 'Passo a passo no SEI/SIGAA' },
+  { to: '/primeiros-passos', label: 'Primeiros Passos', icon: Rocket, desc: 'Orientações para calouros' },
+  { to: '/calendario', label: 'Calendário', icon: CalendarDays, desc: 'Datas-chave do semestre' },
+  { to: '/fluxo', label: 'Fluxo do Curso', icon: Network, desc: 'Grade por semestre' },
   { to: '/links', label: 'Links Úteis', icon: Link2, desc: 'Canais e formulários oficiais' },
 ]
 
