@@ -8,7 +8,7 @@ prazo, desligamento e os canais oficiais de contato.
 > Projeto desenvolvido na disciplina **PSP4 — Projetos de Sistemas de Produção 4**
 > (UnB / EPR), sob orientação do **Prof. Dr. Marcelo Carneiro Gonçalves**.
 
-🔗 **Produção:** _(URL pública do Vercel)_
+🔗 **Produção:** <https://epr-info-hub.vercel.app/>
 
 ---
 
@@ -75,7 +75,17 @@ Vercel publica a mudança automaticamente em ~1 minuto.
 | `src/content/faq.ts`          | Perguntas frequentes                          |
 | `src/content/links.ts`        | Links e contatos oficiais                     |
 | `src/content/temas.ts`        | Cards de acesso rápido da Home                |
+| `src/content/calouro.ts`      | Primeiros Passos (calouros) e contatos do EPR |
+| `src/content/calendario.ts`   | Datas do calendário acadêmico (SAA)           |
+| `src/content/fluxo.ts`        | Grade do curso por semestre                   |
 | `src/content/meta.ts`         | **Datas de "última atualização" por área**    |
+
+> 📅 **Exemplo prático — trocar uma data do calendário:** abra
+> `src/content/calendario.ts`, localize a entrada (ex.: `Período de matrícula`),
+> ajuste `inicio`/`fim` no formato `'AAAA-MM-DD'`, salve e atualize a data de
+> `calendario` em `src/content/meta.ts`. Pelo GitHub: botão ✏️ → editar → "Commit
+> changes" (abre um commit ou PR automaticamente). O Vercel publica em ~1 minuto.
+> A cada semestre, confira o calendário oficial em <https://saa.unb.br/calendario-academico/>.
 
 > ⚠️ Ao revisar uma área, atualize também a data em `src/content/meta.ts` para que
 > o selo "Última atualização" exibido na página reflita a revisão.
@@ -90,7 +100,8 @@ src/
 │   └── ui/       # Accordion, Badge, SearchBar, StepGuide, AtualizadoEm
 ├── hooks/        # useSearch (Fuse.js)
 ├── lib/          # utilitários (cn)
-├── pages/        # Home, Jornada, FAQ, Procedimentos, Links
+├── pages/        # Home, Jornada, FAQ, Procedimentos, Links,
+│                 #   PrimeirosPassos, Calendario, Fluxo
 └── index.css     # Tailwind v4 + tokens UnB (@theme)
 ```
 
@@ -110,6 +121,7 @@ autoUpdate`). Após a primeira visita, o conteúdo fica disponível offline. Par
 
 ## Documentação
 
+- [`docs/HANDOFF.md`](docs/HANDOFF.md) — guia de manutenção e governança (handoff)
 - [`docs/MISSION.md`](docs/MISSION.md) — missão, visão, personas, métricas
 - [`docs/TECH_STACK.md`](docs/TECH_STACK.md) — stack e arquitetura
 - [`docs/ROADMAP.md`](docs/ROADMAP.md) — fases do projeto
