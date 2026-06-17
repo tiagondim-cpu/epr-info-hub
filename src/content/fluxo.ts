@@ -2,12 +2,12 @@ import type { SemestreFluxo } from './types'
 
 export const fontesFluxoCurso = [
   {
-    texto: 'Currículo oficial no SIGAA',
+    texto: 'Estruturas curriculares no SIGAA (estrutura vigente 6017/3)',
     url: 'https://sigaa.unb.br/sigaa/public/curso/curriculo.jsf?id=414326',
   },
   {
-    texto: 'Fluxo no MatrículaWeb',
-    url: 'https://www.matriculaweb.unb.br/graduacao/fluxo.aspx?cod=6017',
+    texto: 'Organização do Curso — Departamento de Engenharia de Produção',
+    url: 'http://epr.unb.br/index.php/graduacao/cursos-2',
   },
 ] as const
 
@@ -17,37 +17,122 @@ export const fluxoTotaisReferencia = {
   creditosObrigatorios: 165,
 } as const
 
-// TODO: transcrever de https://sigaa.unb.br/sigaa/public/curso/curriculo.jsf?id=414326
-// TODO: conferir também em https://www.matriculaweb.unb.br/graduacao/fluxo.aspx?cod=6017
+// Fonte: Projeto Político-Pedagógico (PPP) do curso de Engenharia de Produção da UnB
+// — seção "5.4 Grade curricular" (currículo para conclusão em 12 períodos).
+// Créditos calculados a partir da carga horária total (1 crédito = 15 horas).
+// Os blocos "Optativas / Módulo livre" representam a carga reservada para optativas e
+// módulo livre em cada período. Confirme sempre a estrutura vigente (6017/3) no SIGAA.
 export const fluxoCurso: SemestreFluxo[] = [
   {
     numero: 1,
     disciplinas: [
-      // EXEMPLO — substituir pelos dados oficiais
-      {
-        codigo: 'EPR0000',
-        nome: 'EXEMPLO — Disciplina obrigatória',
-        creditos: 4,
-        tipo: 'obrigatoria',
-      },
-      // EXEMPLO — substituir pelos dados oficiais
-      {
-        codigo: 'OPT0000',
-        nome: 'EXEMPLO — Optativa ou módulo livre',
-        creditos: 4,
-        tipo: 'optativa',
-      },
+      { codigo: '118001', nome: 'Física 1', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '118010', nome: 'Física 1 Experimental', creditos: 2, tipo: 'obrigatoria' },
+      { codigo: '113034', nome: 'Cálculo 1', creditos: 6, tipo: 'obrigatoria' },
+      { codigo: '160130', nome: 'Introdução à Engenharia de Produção', creditos: 2, tipo: 'obrigatoria' },
+      { codigo: '199371', nome: 'Introdução ao Desenvolvimento Sustentável', creditos: 4, tipo: 'obrigatoria' },
     ],
   },
-  { numero: 2, disciplinas: [] },
-  { numero: 3, disciplinas: [] },
-  { numero: 4, disciplinas: [] },
-  { numero: 5, disciplinas: [] },
-  { numero: 6, disciplinas: [] },
-  { numero: 7, disciplinas: [] },
-  { numero: 8, disciplinas: [] },
-  { numero: 9, disciplinas: [] },
-  { numero: 10, disciplinas: [] },
-  { numero: 11, disciplinas: [] },
-  { numero: 12, disciplinas: [] },
+  {
+    numero: 2,
+    disciplinas: [
+      { codigo: '118028', nome: 'Física 2', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '118036', nome: 'Física 2 Experimental', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '113042', nome: 'Cálculo 2', creditos: 6, tipo: 'obrigatoria' },
+      { codigo: '176664', nome: 'Formação de Valor em Sistemas de Produção', creditos: 2, tipo: 'obrigatoria' },
+      { codigo: '176672', nome: 'Ergonomia e Comportamento Humano no Trabalho', creditos: 4, tipo: 'obrigatoria' },
+    ],
+  },
+  {
+    numero: 3,
+    disciplinas: [
+      { codigo: '118044', nome: 'Física 3', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '113913', nome: 'Introdução à Ciência da Computação', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '113051', nome: 'Cálculo 3', creditos: 6, tipo: 'obrigatoria' },
+      { codigo: '200671', nome: 'Metodologia de Projeto de Sistemas de Produção', creditos: 2, tipo: 'obrigatoria' },
+      { codigo: '—', nome: 'Optativas / Módulo livre', creditos: 4, tipo: 'modulo-livre' },
+    ],
+  },
+  {
+    numero: 4,
+    disciplinas: [
+      { codigo: '114626', nome: 'Química Geral Teórica', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '114634', nome: 'Química Geral Experimental', creditos: 2, tipo: 'obrigatoria' },
+      { codigo: '113093', nome: 'Introdução à Álgebra Linear', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '115045', nome: 'Probabilidade e Estatística', creditos: 6, tipo: 'obrigatoria' },
+      { codigo: '203386', nome: 'Projeto de Sistemas de Produção 1', creditos: 2, tipo: 'obrigatoria' },
+    ],
+  },
+  {
+    numero: 5,
+    disciplinas: [
+      { codigo: '206831', nome: 'Desenho Mecânico para Engenharia', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '176681', nome: 'Engenharia Econômica', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '205397', nome: 'Sistemas de Informação em Engenharia de Produção', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '205401', nome: 'Projeto de Sistemas de Produção 2', creditos: 2, tipo: 'obrigatoria' },
+      { codigo: '132012', nome: 'Introdução à Economia', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '—', nome: 'Optativas / Módulo livre', creditos: 4, tipo: 'modulo-livre' },
+    ],
+  },
+  {
+    numero: 6,
+    disciplinas: [
+      { codigo: '168823', nome: 'Introdução à Ciência dos Materiais', creditos: 3, tipo: 'obrigatoria' },
+      { codigo: '166014', nome: 'Mecânica dos Sólidos 1', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '176702', nome: 'Pesquisa Operacional em Engenharia 1', creditos: 6, tipo: 'obrigatoria' },
+      { codigo: '185035', nome: 'Introdução à Ciência Política', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '—', nome: 'Optativas / Módulo livre', creditos: 3, tipo: 'modulo-livre' },
+    ],
+  },
+  {
+    numero: 7,
+    disciplinas: [
+      { codigo: '169714', nome: 'Processos de Fabricação', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '100145', nome: 'Simulação de Sistemas', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '100137', nome: 'Planejamento e Controle da Produção', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '100129', nome: 'Projeto de Sistemas de Produção 4', creditos: 2, tipo: 'obrigatoria' },
+      { codigo: '168921', nome: 'Segurança e Saúde no Trabalho', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '—', nome: 'Optativas / Módulo livre', creditos: 6, tipo: 'modulo-livre' },
+    ],
+  },
+  {
+    numero: 8,
+    disciplinas: [
+      { codigo: '168840', nome: 'Transporte de Calor e Massa', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '102636', nome: 'Gestão da Qualidade na Produção', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '101389', nome: 'Projeto de Sistemas de Produção 5', creditos: 2, tipo: 'obrigatoria' },
+      { codigo: '—', nome: 'Optativas / Módulo livre', creditos: 14, tipo: 'modulo-livre' },
+    ],
+  },
+  {
+    numero: 9,
+    disciplinas: [
+      { codigo: '101591', nome: 'Logística', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '101605', nome: 'Engenharia do Produto', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '101397', nome: 'Projeto de Sistemas de Produção 6', creditos: 2, tipo: 'obrigatoria' },
+      { codigo: '—', nome: 'Optativas / Módulo livre', creditos: 14, tipo: 'modulo-livre' },
+    ],
+  },
+  {
+    numero: 10,
+    disciplinas: [
+      { codigo: '176699', nome: 'Gestão Estratégica', creditos: 4, tipo: 'obrigatoria' },
+      { codigo: '101401', nome: 'Projeto de Sistemas de Produção 7', creditos: 2, tipo: 'obrigatoria' },
+      { codigo: '—', nome: 'Optativas / Módulo livre', creditos: 18, tipo: 'modulo-livre' },
+    ],
+  },
+  {
+    numero: 11,
+    disciplinas: [
+      { codigo: '101508', nome: 'Estágio Supervisionado', creditos: 12, tipo: 'obrigatoria' },
+      { codigo: '105911', nome: 'Projeto de Graduação em Engenharia de Produção 1', creditos: 2, tipo: 'obrigatoria' },
+    ],
+  },
+  {
+    numero: 12,
+    disciplinas: [
+      { codigo: '105929', nome: 'Projeto de Graduação em Engenharia de Produção 2', creditos: 2, tipo: 'obrigatoria' },
+      { codigo: '—', nome: 'Optativas / Módulo livre', creditos: 10, tipo: 'modulo-livre' },
+    ],
+  },
 ]

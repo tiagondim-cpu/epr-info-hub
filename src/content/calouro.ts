@@ -5,6 +5,12 @@ export const manualCalouroDeg = {
   url: 'https://deg.unb.br/manual-do-calouro/',
 } as const
 
+export const secretariaEpr = {
+  email: 'epr@unb.br',
+  telefone: '+55 (61) 3107-5678',
+  paginaContato: 'http://epr.unb.br/index.php/contato',
+} as const
+
 export const passosCalouro: PassoCalouro[] = [
   {
     numero: 1,
@@ -36,10 +42,10 @@ export const passosCalouro: PassoCalouro[] = [
     numero: 4,
     titulo: 'Salve os canais da secretaria do EPR',
     descricao:
-      'Use a secretaria para dúvidas específicas do curso, especialmente quando a orientação geral da UnB não resolver o caso de Produção.',
+      'Use a secretaria para dúvidas específicas do curso, especialmente quando a orientação geral da UnB não resolver o caso de Produção. Telefone do departamento: (61) 3107-5678.',
     link: {
-      texto: 'Enviar e-mail para a secretaria',
-      url: 'mailto:epr@unb.br',
+      texto: 'Página de contato do EPR',
+      url: secretariaEpr.paginaContato,
     },
   },
   {
@@ -64,7 +70,7 @@ export const duvidasCalouro: FaqItem[] = [
   {
     pergunta: 'Qual canal devo usar para dúvidas específicas do curso?',
     resposta:
-      'Para dúvidas específicas de Engenharia de Produção, procure a secretaria do EPR pelo e-mail epr@unb.br. Para regras gerais da graduação, consulte primeiro DEG, SAA e SIGAA.',
+      'Para dúvidas específicas de Engenharia de Produção, procure a secretaria do EPR pela página de contato do departamento (epr.unb.br) ou pelo telefone (61) 3107-5678. Para regras gerais da graduação, consulte primeiro DEG, SAA e SIGAA.',
     tags: ['secretaria', 'EPR', 'contato'],
   },
   {
