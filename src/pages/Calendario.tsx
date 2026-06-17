@@ -45,10 +45,10 @@ export default function Calendario() {
         <AtualizadoEm area="calendario" className="mt-3" />
       </div>
 
-      <div className="rounded-xl border border-amber-200 bg-amber-50 p-5 text-sm leading-relaxed text-amber-800">
-        <p className="font-semibold">Conteúdo em atualização</p>
+      <div className="rounded-xl border border-blue-200 bg-blue-50 p-5 text-sm leading-relaxed text-blue-900">
+        <p className="font-semibold">Datas oficiais do semestre {semestreVigente}</p>
         <p className="mt-1">
-          As datas abaixo são exemplos para validar a página. Elas devem ser substituídas pelas datas oficiais transcritas da SAA.
+          Transcritas do Calendário de Graduação por Atividades da SAA (publicado em 27/02/2026). Confirme sempre na fonte oficial antes de qualquer decisão acadêmica.
         </p>
       </div>
 

@@ -39,10 +39,10 @@ export default function Fluxo() {
         <AtualizadoEm area="fluxo" className="mt-3" />
       </div>
 
-      <div className="rounded-xl border border-amber-200 bg-amber-50 p-5 text-sm leading-relaxed text-amber-800">
-        <p className="font-semibold">Grade em transcrição</p>
+      <div className="rounded-xl border border-blue-200 bg-blue-50 p-5 text-sm leading-relaxed text-blue-900">
+        <p className="font-semibold">Grade de referência do curso</p>
         <p className="mt-1">
-          As disciplinas exibidas como EXEMPLO devem ser substituídas pela grade oficial conferida no SIGAA e no MatrículaWeb.
+          Baseada na grade curricular do Projeto Político-Pedagógico (PPP) do curso. Confirme sempre a estrutura curricular vigente (6017/3) e os pré-requisitos no SIGAA antes de planejar sua matrícula.
         </p>
       </div>
 
