@@ -2,7 +2,7 @@ import type { SemestreFluxo } from './types'
 
 export const fontesFluxoCurso = [
   {
-    texto: 'Estruturas curriculares no SIGAA (estrutura vigente 6017/3)',
+    texto: 'Estruturas curriculares no SIGAA (todas as matrizes do curso)',
     url: 'https://sigaa.unb.br/sigaa/public/curso/curriculo.jsf?id=414326',
   },
   {
@@ -11,6 +11,19 @@ export const fontesFluxoCurso = [
   },
 ] as const
 
+// Aviso sobre o novo currículo 617/3 (apresentado pela coordenação do curso em jun/2026).
+export const novoCurriculo617 = {
+  titulo: 'Novo currículo 617/3 — a partir de 2026.2',
+  descricao:
+    'A grade abaixo é a matriz atual (currículo 2021), válida para quem já está no curso. ' +
+    'Em 2026.2 entra um novo currículo (nº 617/3): 10 semestres (5 anos), com eixo de ciência ' +
+    'de dados/IA e disciplinas extensionistas (os PSPs e Introdução à Engenharia de Produção ' +
+    'passam a ser extensionistas). Calouros de 2026.2 entram automaticamente no novo currículo; ' +
+    'quem já está no curso pode migrar de forma opcional via peticionamento no SEI — avalie com ' +
+    'cuidado, pois a migração é só de ida e disciplinas que viraram extensionistas precisam ser ' +
+    'refeitas. Em caso de dúvida, procure a coordenação ou a secretaria do EPR.',
+} as const
+
 export const fluxoTotaisReferencia = {
   semestres: 12,
   creditos: 240,
@@ -18,10 +31,12 @@ export const fluxoTotaisReferencia = {
 } as const
 
 // Fonte: Projeto Político-Pedagógico (PPP) do curso de Engenharia de Produção da UnB
-// — seção "5.4 Grade curricular" (currículo para conclusão em 12 períodos).
+// — seção "5.4 Grade curricular" (currículo para conclusão em 12 períodos). Corresponde
+// à matriz atual (currículo 2021), válida para quem já está no curso.
 // Créditos calculados a partir da carga horária total (1 crédito = 15 horas).
 // Os blocos "Optativas / Módulo livre" representam a carga reservada para optativas e
-// módulo livre em cada período. Confirme sempre a estrutura vigente (6017/3) no SIGAA.
+// módulo livre em cada período. OBS.: um novo currículo (617/3) entra em 2026.2 — ver
+// "novoCurriculo617" acima e confira a matriz aplicável a você no SIGAA.
 export const fluxoCurso: SemestreFluxo[] = [
   {
     numero: 1,

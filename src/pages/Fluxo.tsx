@@ -1,7 +1,12 @@
 import { ExternalLink, Network } from 'lucide-react'
 import Badge from '../components/ui/Badge'
 import AtualizadoEm from '../components/ui/AtualizadoEm'
-import { fluxoCurso, fluxoTotaisReferencia, fontesFluxoCurso } from '../content/fluxo'
+import {
+  fluxoCurso,
+  fluxoTotaisReferencia,
+  fontesFluxoCurso,
+  novoCurriculo617,
+} from '../content/fluxo'
 import type { Disciplina } from '../content/types'
 import { cn } from '../lib/utils'
 
@@ -39,10 +44,15 @@ export default function Fluxo() {
         <AtualizadoEm area="fluxo" className="mt-3" />
       </div>
 
+      <div className="rounded-xl border border-amber-300 bg-amber-50 p-5 text-sm leading-relaxed text-amber-900">
+        <p className="font-semibold">{novoCurriculo617.titulo}</p>
+        <p className="mt-1">{novoCurriculo617.descricao}</p>
+      </div>
+
       <div className="rounded-xl border border-blue-200 bg-blue-50 p-5 text-sm leading-relaxed text-blue-900">
-        <p className="font-semibold">Grade de referência do curso</p>
+        <p className="font-semibold">Grade da matriz atual (currículo 2021)</p>
         <p className="mt-1">
-          Baseada na grade curricular do Projeto Político-Pedagógico (PPP) do curso. Confirme sempre a estrutura curricular vigente (6017/3) e os pré-requisitos no SIGAA antes de planejar sua matrícula.
+          Baseada na grade curricular do Projeto Político-Pedagógico (PPP) do curso. Confirme sempre os pré-requisitos e a matriz aplicável a você no SIGAA antes de planejar sua matrícula.
         </p>
       </div>
 

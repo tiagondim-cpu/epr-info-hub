@@ -42,10 +42,10 @@ export const passosCalouro: PassoCalouro[] = [
     numero: 4,
     titulo: 'Salve os canais da secretaria do EPR',
     descricao:
-      'Use a secretaria para dúvidas específicas do curso, especialmente quando a orientação geral da UnB não resolver o caso de Produção. Telefone do departamento: (61) 3107-5678.',
+      'Use a secretaria para dúvidas específicas do curso, especialmente quando a orientação geral da UnB não resolver o caso de Produção. E-mail: epr@unb.br · Telefone: (61) 3107-5678 · Página de contato: epr.unb.br.',
     link: {
-      texto: 'Página de contato do EPR',
-      url: secretariaEpr.paginaContato,
+      texto: 'Enviar e-mail para a secretaria',
+      url: `mailto:${secretariaEpr.email}`,
     },
   },
   {
@@ -70,8 +70,14 @@ export const duvidasCalouro: FaqItem[] = [
   {
     pergunta: 'Qual canal devo usar para dúvidas específicas do curso?',
     resposta:
-      'Para dúvidas específicas de Engenharia de Produção, procure a secretaria do EPR pela página de contato do departamento (epr.unb.br) ou pelo telefone (61) 3107-5678. Para regras gerais da graduação, consulte primeiro DEG, SAA e SIGAA.',
+      'Para dúvidas específicas de Engenharia de Produção, procure a secretaria do EPR pelo e-mail epr@unb.br, pelo telefone (61) 3107-5678 ou pela página de contato do departamento (epr.unb.br). Para regras gerais da graduação, consulte primeiro DEG, SAA e SIGAA.',
     tags: ['secretaria', 'EPR', 'contato'],
+  },
+  {
+    pergunta: 'Entrei em 2026.2 — sigo o currículo novo (617/3)?',
+    resposta:
+      'Sim. Quem ingressa a partir de 2026.2 entra automaticamente no novo currículo 617/3 (10 semestres, com eixo de ciência de dados e disciplinas extensionistas). A página "Fluxo do Curso" ainda mostra a matriz atual (currículo 2021), usada por quem já estava no curso. Para a grade exata do novo currículo, confirme no SIGAA ou com a coordenação/secretaria do EPR.',
+    tags: ['currículo', '617/3', 'calouro', '2026.2'],
   },
   {
     pergunta: 'Preciso resolver tudo antes do primeiro dia de aula?',

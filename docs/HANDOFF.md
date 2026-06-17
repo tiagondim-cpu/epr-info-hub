@@ -78,11 +78,16 @@ A cada início de semestre (ou quando a SAA publicar novo calendário):
 - [`.github/workflows/links.yml`](../.github/workflows/links.yml) — valida links
   externos semanalmente e abre issue em caso de link quebrado.
 
-## 7. Pendências de dado oficial
+## 7. Pendências e notas de dado oficial
 
 - **Calendário 2026/1**: transcrito do PDF oficial da SAA (publicado em 27/02/2026). ✅
-- **Fluxo**: transcrito da grade do PPP do curso; a estrutura vigente no SIGAA é a
-  6017/3 (2026) — confirmar se há divergência de disciplinas/créditos. ⚠️
-- **E-mail da secretaria**: a página de contato do EPR protege o e-mail contra spam
-  (exige JavaScript); o app usa `epr@unb.br` e aponta para a página oficial de contato.
-  Confirmar o e-mail correto com a secretaria. ⚠️
+- **E-mail da secretaria**: `epr@unb.br` confirmado correto (jun/2026). Telefone:
+  (61) 3107-5678. ✅
+- **Fluxo (matriz atual)**: transcrito da grade do PPP do curso — corresponde ao
+  currículo 2021, válido para quem já está no curso. Mantido como está. ✅
+- **Novo currículo 617/3 (2026.2)**: a coordenação apresentou (jun/2026) um novo
+  currículo que entra em 2026.2 — 10 semestres (5 anos), eixo de ciência de dados e
+  disciplinas extensionistas. A página Fluxo exibe um aviso sobre isso, mas **a grade
+  completa do novo currículo ainda não foi transcrita** (não há documento público com
+  a lista por período/créditos). Quando a coordenação publicar a matriz 617/3, criar a
+  grade nova em `src/content/fluxo.ts` (ou uma seção separada). ⚠️
